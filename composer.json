@@ -1,0 +1,15 @@
+{
+  "name": "vendor_name/create_test",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "parta",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "ezyang/htmlpurifier": "4.*"
+  }
+}
