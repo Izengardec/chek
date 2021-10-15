@@ -2,7 +2,7 @@
 class CreateTest{
     // подключение к базе данных и таблице 'products'
     private $conn;
-    private $table_name = "products";
+    private $table_name = "tests";
 
     // свойства объекта
     public $subj_id;
@@ -17,7 +17,7 @@ class CreateTest{
     }
 
     function create(){
-        
+
         // запрос для вставки (создания) записей
         $query = "INSERT INTO
                 " . $this->table_name . "
@@ -36,7 +36,6 @@ class CreateTest{
         $stmt->bindParam(":subj_id", $this->subj_id);
         $stmt->bindParam(":title", $this->title);
         $stmt->bindParam(":user_id", $this->user_id);
-
         // выполняем запрос
         if ($stmt->execute()) {
             return true;
@@ -47,11 +46,7 @@ class CreateTest{
 
     function get_last_id(){
         // запрос для вставки (создания) записей
-        $query = "SELECT 
-                " . $this->table_name . "
-            SET
-                subj_id=:subj_id, title=:title, user_id=:user_id;
-                SELECT id
+        $query = "SELECT id
                 FROM " . $this->table_name . "
                 ORDER BY id DESC
                 LIMIT 1";
@@ -60,7 +55,7 @@ class CreateTest{
         $stmt = $this->conn->prepare($query);
         // выполняем запрос
         if ($stmt->execute()) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC));
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
             extract($row);
             $this->ins_id = $id;
             return true;

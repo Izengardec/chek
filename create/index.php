@@ -11,12 +11,12 @@ $db = $database->getConnection();
 
 // инициализируем объект
 $create_test = new CreateTest($db);
-$data = json_decode(file_get_contents("php://input"));
+$data = json_decode($_GET['data']);
 if (
     !empty($data->subj_id) &&
     !empty($data->title) &&
     !empty($data->user_id) &&
-    is_int($data->subj_i) &&
+    is_int($data->subj_id) &&
     is_int($data->user_id)
 ) {
     //подключаем xss защиту
@@ -30,21 +30,21 @@ if (
 
         // установим код ответа - 201 создано
         http_response_code(201);
-         if ($create_test->get_last_id()){
-             echo json_encode(array("success" => true,'ins_id' => $create_test->ins_id), JSON_UNESCAPED_UNICODE);
+        if ($create_test->get_last_id()){
+            echo json_encode(array("success" => true,'ins_id' => $create_test->ins_id), JSON_UNESCAPED_UNICODE);
         }
-         else{
+        else{
             // установим код ответа - 503 сервис недоступен
             http_response_code(503);
             // сообщим пользователю
-             echo json_encode(array("success" => false,'reason' => 'Невозможно создать запись.'), JSON_UNESCAPED_UNICODE);
+            echo json_encode(array("success" => false,'reason' => 'Невозможно создать запись1.'), JSON_UNESCAPED_UNICODE);
         }
     }
     else {
         // установим код ответа - 503 сервис недоступен
         http_response_code(503);
         // сообщим пользователю
-        echo json_encode(array("success" => false,'reason' => 'Невозможно создать запись.'), JSON_UNESCAPED_UNICODE);
+        echo json_encode(array("success" => false,'reason' => 'Невозможно создать запись2.'), JSON_UNESCAPED_UNICODE);
     }
 }
 
