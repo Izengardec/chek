@@ -60,7 +60,7 @@ class CreateTest{
         $stmt = $this->conn->prepare($query);
         // выполняем запрос
         if ($stmt->execute()) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC))
+            $row = $stmt->fetch(PDO::FETCH_ASSOC));
             extract($row);
             $this->ins_id = $id;
             return true;
